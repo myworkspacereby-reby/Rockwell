@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:it,wght@0,300;0,400;0,500;0,700;1,300&family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@300;400;600;700&family=JetBrains+Mono:ital,wght@0,400;1,400&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,600;0,800;1,400&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-syne: "Syne", sans-serif;
+  --font-sans: "DM Sans", sans-serif;
+  
+  /* Ready for selection */
+  --font-outfit: "Outfit", sans-serif;
+  --font-space: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-jakarta: "Plus Jakarta Sans", sans-serif;
+  --font-inter: "Inter", sans-serif;
+  --font-display: "Playfair Display", serif;
+
+  --color-gold: #E6B962;
+  --color-gold-dark: #C09549;
+  --color-bg-edge: #050B1F;
+  --color-bg-center: #0F1C40;
+  --color-accent-purple: #6D3FD3;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-bg-edge text-[#E0E6ED] antialiased min-h-screen selection:bg-gold/30;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    background: radial-gradient(circle at center, var(--color-bg-center) 0%, var(--color-bg-edge) 100%);
+    background-attachment: fixed;
+  }
+}
+
+@layer components {
+  .silver-gradient {
+    background: linear-gradient(to bottom right, #FFFFFF, #F1F5F9, #CBD5E1);
+  }
+
+  .gold-text {
+    @apply bg-linear-to-br from-gold to-gold-dark bg-clip-text text-transparent;
+  }
+
+  .gold-text-glow {
+    @apply bg-linear-to-r from-gold via-[#F7E1AD] to-gold bg-clip-text text-transparent;
+    filter: drop-shadow(0 0 15px rgba(230, 185, 98, 0.6));
+  }
+
+  .hero-overlay {
+    background: linear-gradient(to bottom, rgba(5, 11, 31, 0.4), rgba(5, 11, 31, 0.9));
+  }
+
+  .glass-card {
+    @apply bg-white/5 border border-white/10 backdrop-blur-xl rounded-2xl p-8 transition-all hover:border-gold/50 hover:shadow-[0_0_30px_rgba(230,185,98,0.1)];
+  }
+
+  .price-text {
+    @apply font-syne font-extrabold bg-linear-to-br from-gold to-gold-dark bg-clip-text text-transparent;
+  }
+
+  .featured-ribbon {
+    @apply absolute top-6 -right-12 text-bg-edge py-1 px-12 rotate-45 text-[10px] font-bold tracking-widest uppercase shadow-lg;
+    background: linear-gradient(to bottom right, #F8FAFC, #CBD5E1, #94A3B8);
+  }
+
+  .glow-orb {
+    @apply absolute rounded-full blur-[120px] opacity-20 pointer-events-none;
+  }
+
+  .form-input {
+    @apply w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-[#A3B1C6]/50 focus:outline-hidden focus:ring-2 focus:ring-gold/50 focus:border-gold/50 transition-all;
+  }
+
+  .form-label {
+    @apply block text-xs font-syne font-bold uppercase tracking-widest text-[#A3B1C6] mb-2;
+  }
+}
