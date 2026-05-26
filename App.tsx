@@ -3,7 +3,11 @@ import { motion, AnimatePresence } from 'motion/react';
 import { 
   ChevronDown, 
   CheckCircle2, 
+  Target, 
+  Zap, 
+  ShieldCheck, 
   Layout, 
+  TrendingUp, 
   Calendar,
   Mail,
   Smartphone,
@@ -12,9 +16,9 @@ import {
 } from 'lucide-react';
 
 // @ts-ignore
-import logoImg from './rockwell_logo_white_1779096188911.png';
+import logoImg from './assets/images/rockwell_logo_white_1779096188911.png';
 // @ts-ignore
-import heroBg from './hero_workspace_background_1779091807771.png';
+import heroBg from './assets/images/hero_workspace_background_1779091807771.png';
 
 const BackgroundGlow = () => (
   <div className="fixed inset-0 overflow-hidden -z-10 bg-bg-edge">
@@ -209,54 +213,83 @@ export default function App() {
   const packages = [
     {
       title: "Social Content System",
-      price: "$550",
-      period: "MONTHLY RETAINER",
-      time: "20 hours / mo",
+      price: "$700",
+      period: "ONE-TIME BUILD",
+      time: "3 days",
       features: [
         "Full Social Media Management",
-        "3-4 highly engaging posts per week",
+        "3-4 posts per week",
         "Automated DM and comment replies",
-        "Comprehensive Monthly Performance Reporting"
+        "Monthly Performance Reporting"
       ]
     },
     {
       title: "GHL Foundation",
-      price: "$600",
-      period: "MONTHLY RETAINER",
-      time: "25 hours / mo",
-      badge: "POPULAR",
+      price: "$900",
+      period: "ONE-TIME BUILD",
+      time: "1 week",
+      badge: "NEW",
       features: [
         "Full Social Media Management",
-        "Custom GoHighLevel CRM setup",
-        "Advanced email automation workflows",
-        "Comprehensive Monthly Performance Reporting"
+        "GHL CRM setup",
+        "Email automation workflows",
+        "Monthly Performance Reporting"
       ]
     },
     {
       title: "Growth Accelerator",
-      price: "$800",
-      period: "MONTHLY RETAINER",
-      time: "30 hours / mo",
+      price: "$1,250",
+      period: "ONE-TIME BUILD",
+      time: "1-2 weeks",
       features: [
         "Advanced Social Media Management",
-        "Everything included in the Foundation tier",
-        "10 custom premium AI-designed assets",
-        "Comprehensive Monthly Performance Reporting"
+        "Everything in Foundation box",
+        "10 custom AI-designed images",
+        "Monthly Performance Reporting"
       ]
     },
     {
       title: "Revenue Engine",
-      price: "$1,250",
-      period: "MONTHLY RETAINER",
-      time: "40 hours / mo",
+      price: "$1,750",
+      period: "ONE-TIME BUILD",
+      time: "1-2 weeks",
       featured: true,
-      badge: "MOST POPULAR",
       features: [
-        "Priority Day-to-Day Social Media Management",
-        "Full GoHighLevel system optimization",
-        "Automated Lead Finding infrastructure (Apollo)",
-        "Premium AI video content production",
-        "Deep-Dive Monthly Performance Analytics & Reporting"
+        "Priority Social Media Management",
+        "Full GHL system management",
+        "Automated Lead Finding",
+        "AI video content creation",
+        "Detailed Monthly Performance Reporting"
+      ]
+    },
+    {
+      title: "Website Launch",
+      price: "$2,000",
+      period: "ONE-TIME BUILD",
+      time: "1+ weeks",
+      featured: true,
+      features: [
+        "5-7 GHL landing pages",
+        "Contact forms",
+        "Lead magnet integration",
+        "Booking functionality",
+        "Email capture setup",
+        "Social platform integration (IG, FB, TikTok)"
+      ]
+    },
+    {
+      title: "Complete Growth Stack",
+      price: "$2,500",
+      period: "ONE-TIME BUILD",
+      time: "2 weeks",
+      featured: true,
+      features: [
+        "5-7 custom GHL pages",
+        "Full GHL CRM setup",
+        "Automation workflows",
+        "Forms & lead magnets",
+        "Email sequences",
+        "Social integration (IG, FB, TikTok)"
       ]
     }
   ];
@@ -281,6 +314,7 @@ export default function App() {
     setSubmitStatus('idle');
 
     try {
+      // Using FormSubmit.co as a zero-config backend to handle personal email delivery
       const response = await fetch('https://formsubmit.co/ajax/myworkspace.reby@gmail.com', {
         method: 'POST',
         headers: {
@@ -306,3 +340,23 @@ export default function App() {
       console.error('Form submission error:', error);
       setSubmitStatus('error');
     } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="relative min-h-screen">
+      <BackgroundGlow />
+      
+      {/* Sticky Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-transparent py-4">
+        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+          <a href="#home" className="flex items-center">
+            <img 
+              src={logoImg} 
+              alt="Rockwell" 
+              className="h-8 md:h-10 transition-opacity hover:opacity-80" 
+            />
+          </a>
+          <nav className="hidden md:flex items-center gap-8">
+            <a href="#home" className="text-[10px] font-syne font-bold
