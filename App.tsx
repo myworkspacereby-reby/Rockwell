@@ -15,11 +15,6 @@ import {
   Clock
 } from 'lucide-react';
 
-// @ts-ignore
-import logoImg from './assets/images/rockwell_logo_white_1779096188911.png';
-// @ts-ignore
-import heroBg from './assets/images/hero_workspace_background_1779091807771.png';
-
 const BackgroundGlow = () => (
   <div className="fixed inset-0 overflow-hidden -z-10 bg-bg-edge">
     <motion.div 
@@ -314,7 +309,6 @@ export default function App() {
     setSubmitStatus('idle');
 
     try {
-      // Using FormSubmit.co as a zero-config backend to handle personal email delivery
       const response = await fetch('https://formsubmit.co/ajax/myworkspace.reby@gmail.com', {
         method: 'POST',
         headers: {
@@ -352,11 +346,287 @@ export default function App() {
       <header className="fixed top-0 left-0 right-0 z-50 bg-transparent py-4">
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           <a href="#home" className="flex items-center">
-            <img 
-              src={logoImg} 
-              alt="Rockwell" 
-              className="h-8 md:h-10 transition-opacity hover:opacity-80" 
-            />
+            <span className="font-syne font-bold text-xl tracking-[4px] text-white transition-opacity hover:opacity-80">ROCKWELL</span>
           </a>
           <nav className="hidden md:flex items-center gap-8">
-            <a href="#home" className="text-[10px] font-syne font-bold
+            <a href="#home" className="text-[10px] font-syne font-bold tracking-[4px] uppercase text-white/60 hover:text-gold transition-colors">Home</a>
+            <a href="#packages" className="text-[10px] font-syne font-bold tracking-[4px] uppercase text-white/60 hover:text-gold transition-colors">Workflows</a>
+            <a href="#faq" className="text-[10px] font-syne font-bold tracking-[4px] uppercase text-white/60 hover:text-gold transition-colors">FAQ</a>
+            <a href="#contact" className="px-6 py-2 border border-gold/30 text-gold text-[10px] font-syne font-bold tracking-[4px] uppercase rounded-full hover:bg-gold hover:text-bg-edge transition-all">Connect</a>
+          </nav>
+        </div>
+      </header>
+
+      <div className="max-w-7xl mx-auto px-6 py-12 pt-24">
+      {/* Hero Section / The Story */}
+      <motion.section 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="relative min-h-[90vh] flex flex-col items-center justify-center text-center mb-24 rounded-[40px] overflow-hidden"
+        id="home"
+      >
+        <div className="relative z-10 px-6 py-20 max-w-6xl mx-auto w-full">
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
+            <div className="flex justify-center mb-12">
+              <span className="font-syne font-bold text-2xl tracking-[6px] text-gold border border-gold px-6 py-2 rounded-full">ROCKWELL</span>
+            </div>
+            <h1 className="font-syne font-extrabold text-5xl md:text-[90px] mb-8 leading-[0.9] tracking-tighter uppercase text-white drop-shadow-2xl">
+              AUTOMATE YOUR<br />
+              GROWTH.<br />
+              RECLAIM YOUR <span className="gold-text-glow italic">TIME.</span>
+            </h1>
+            <p className="text-white/90 text-lg md:text-xl max-w-2xl mx-auto font-sans font-medium leading-relaxed mb-12 drop-shadow-md">
+              I build professional AI systems that handle your social media and workflows <span className="text-gold font-bold">24/7</span>, so you can stop doing manual work and focus on scaling your business.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+              <a 
+                href="https://calendly.com/myworkspace-reby/client-discovery-call" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="px-12 py-5 bg-gold text-bg-edge font-syne font-extrabold rounded-full tracking-widest uppercase hover:shadow-[0_0_40px_rgba(230,185,98,0.6)] transition-all transform hover:scale-105 inline-block text-sm"
+              >
+                Book Discovery Call
+              </a>
+              <a 
+                href="#packages" 
+                className="px-12 py-5 border-2 border-white/20 bg-bg-edge/40 backdrop-blur-md text-white font-syne font-bold rounded-full tracking-widest uppercase hover:bg-white/10 transition-all text-sm"
+              >
+                See Workflows
+              </a>
+            </div>
+          </motion.div>
+        </div>
+      </motion.section>
+
+      {/* Packages Section */}
+      <section className="mb-32 scroll-mt-24" id="packages">
+        <div className="text-center mb-16 px-4">
+          <h2 className="font-syne font-extrabold text-4xl md:text-5xl uppercase tracking-wider mb-4 text-white">High Performance Execution Tiers</h2>
+          <p className="text-[#A3B1C6] text-lg max-w-2xl mx-auto font-light leading-relaxed">Choose the system that fits your growth stage</p>
+          <div className="h-px w-24 bg-gold mx-auto mt-6" />
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {packages.map((pkg, idx) => (
+            <PackageCard key={idx} {...pkg} />
+          ))}
+        </div>
+      </section>
+
+      {/* Frequently Asked Questions Section */}
+      <motion.section
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="mb-32 scroll-mt-24"
+        id="faq"
+      >
+        <div className="flex items-center gap-6 mb-12">
+          <div className="h-px bg-linear-to-r from-transparent via-gold to-gold flex-1" />
+          <h2 className="font-syne font-bold text-2xl uppercase tracking-[6px] flex items-center gap-4">
+            <Layout className="w-6 h-6 text-gold" />
+            Frequently Asked Questions
+          </h2>
+          <div className="h-px bg-linear-to-r from-gold via-gold to-transparent flex-1" />
+        </div>
+
+        <div className="space-y-4 max-w-3xl mx-auto">
+          {faqs.map((faq) => (
+            <FAQBox
+              key={faq.id}
+              isOpen={openFaq === faq.id}
+              onToggle={() => setOpenFaq(openFaq === faq.id ? null : faq.id)}
+              {...faq}
+            />
+          ))}
+        </div>
+        
+        <div className="text-center mt-16 opacity-60 font-sans italic text-xl md:text-2xl text-[#A3B1C6] max-w-2xl mx-auto px-6">
+          'Clarity is the first step toward efficiency.'
+        </div>
+      </motion.section>
+
+      {/* Contact Section */}
+      <section className="relative py-24 mb-12" id="contact">
+        <div className="absolute inset-0 bg-white/5 rounded-[40px] border border-white/10 -z-10 shadow-[0_0_50px_rgba(255,255,255,0.02)]" />
+        <div className="px-6">
+          <div className="text-center mb-16">
+            <h2 className="font-syne font-extrabold text-4xl md:text-5xl mb-6">Ready to Automate?</h2>
+            <p className="text-[#A3B1C6] text-lg max-w-2xl mx-auto font-light">
+              Let's discuss your backend architecture and how AI can reclaim 20+ hours of your week.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
+            {/* Contact Form */}
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.1 }}
+              className="glass-card"
+            >
+              <form className="space-y-6" onSubmit={handleSubmit}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div>
+                    <label className="form-label">Name</label>
+                    <input 
+                      name="name"
+                      type="text" 
+                      required
+                      placeholder="John Doe" 
+                      className="form-input"
+                      value={formState.name}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div>
+                    <label className="form-label">Email</label>
+                    <input 
+                      name="email"
+                      type="email" 
+                      required
+                      placeholder="john@example.com" 
+                      className="form-input"
+                      value={formState.email}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="form-label">Subject</label>
+                  <input 
+                    name="subject"
+                    type="text" 
+                    placeholder="Project Inquiry" 
+                    className="form-input"
+                    value={formState.subject}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div>
+                  <label className="form-label">Message</label>
+                  <textarea 
+                    name="message"
+                    rows={4} 
+                    required
+                    placeholder="Tell me about your current bottlenecks..." 
+                    className="form-input resize-none"
+                    value={formState.message}
+                    onChange={handleInputChange}
+                  ></textarea>
+                </div>
+                
+                {submitStatus === 'success' && (
+                  <motion.div 
+                    initial={{ scale: 0.9, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    className="p-4 rounded-xl bg-green-500/10 border border-green-500/20 text-green-400 text-sm flex items-center gap-3"
+                  >
+                    <CheckCircle2 className="w-5 h-5 flex-shrink-0" />
+                    Message sent successfully! Reby will contact you shortly.
+                  </motion.div>
+                )}
+
+                {submitStatus === 'error' && (
+                  <motion.div 
+                    initial={{ scale: 0.9, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm"
+                  >
+                    Something went wrong. Please try again or contact me directly via email.
+                  </motion.div>
+                )}
+
+                <button 
+                  type="submit" 
+                  disabled={isSubmitting}
+                  className={`w-full py-4 bg-gold text-bg-edge font-syne font-extrabold rounded-xl tracking-widest uppercase transition-all transform hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(230,185,98,0.4)] flex items-center justify-center gap-2 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
+                >
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                  {!isSubmitting && <ArrowRight className="w-4 h-4" />}
+                </button>
+              </form>
+            </motion.div>
+
+            {/* Alternative Contact & Info */}
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
+              className="flex flex-col justify-between"
+            >
+              <div className="space-y-8">
+                <div className="glass-card bg-gold/5 border-gold/20 p-8">
+                  <h3 className="font-syne font-bold text-xl text-gold mb-4 flex items-center gap-2">
+                    <Calendar className="w-5 h-5" />
+                    Prefer a call?
+                  </h3>
+                  <p className="text-[#A3B1C6] text-sm mb-6 leading-relaxed">
+                    Skip the form and book a 15-minute strategy call directly to see if we're a good fit.
+                  </p>
+                  <a 
+                    href="https://calendly.com/myworkspace-reby/client-discovery-call" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="w-full flex items-center justify-center gap-3 px-8 py-4 bg-white/5 border border-white/10 hover:bg-white/10 text-white font-syne font-bold rounded-xl tracking-widest uppercase transition-all"
+                  >
+                    Schedule on Calendly
+                  </a>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-gold/30 transition-all group cursor-pointer overflow-hidden">
+                    <div className="p-3 rounded-lg bg-gold/10 text-gold group-hover:scale-110 transition-transform shrink-0">
+                      <Mail className="w-5 h-5" />
+                    </div>
+                    <div className="min-w-0">
+                      <span className="block text-[10px] font-syne font-bold tracking-widest uppercase text-[#A3B1C6]">Email</span>
+                      <span className="text-sm font-medium break-all block">myworkspace.reby@gmail.com</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-gold/30 transition-all group cursor-pointer overflow-hidden">
+                    <div className="p-3 rounded-lg bg-gold/10 text-gold group-hover:scale-110 transition-transform shrink-0">
+                      <Smartphone className="w-5 h-5" />
+                    </div>
+                    <div className="min-w-0">
+                      <span className="block text-[10px] font-syne font-bold tracking-widest uppercase text-[#A3B1C6]">WhatsApp</span>
+                      <span className="text-sm font-medium break-all block">+63 998 287 6037</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-8 p-6 border-l-2 border-gold/30 bg-gold/5 rounded-r-2xl italic text-[#A3B1C6] text-sm leading-relaxed">
+                "I am dedicated to saving your business from manual burnout and making sure that your investment in automation is worth every cent."
+                <span className="block mt-2 font-bold text-gold not-italic uppercase tracking-widest text-[10px]"> — REBY</span>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="pt-24 border-t border-white/5 text-center px-6">
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="font-display text-4xl md:text-6xl text-white italic mb-16 leading-tight tracking-tight max-w-4xl mx-auto"
+        >
+          'Focus on your vision. <br className="hidden md:block" />
+          <span className="gold-text italic">Let the systems handle the rest.</span>'
+        </motion.p>
+        <div className="flex items-center justify-center gap-2 text-[10px] font-syne font-bold tracking-[8px] uppercase opacity-30 text-gold mb-4">
+          <CheckCircle2 className="w-3 h-3" />
+          High Performance Systems Architect
+        </div>
+        <p className="text-[9px] uppercase tracking-[4px] opacity-20">
+          © 2026 Rockwell
+        </p>
+      </footer>
+    </div>
+  </div>
+);
+}
